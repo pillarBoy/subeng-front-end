@@ -14,3 +14,6 @@ yarn
 yarn dev
 
 ```
+
+本地浏览器打开访问即可
+`http://localhost:3000`

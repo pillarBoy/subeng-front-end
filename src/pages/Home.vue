@@ -6,6 +6,10 @@
         <div class="submit-button">
             <Button @click="uploadHash">push</Button>
         </div>
+        <input type="text" v-model="id">
+        <div class="submit-button">
+            <Button @click="get">get</Button>
+        </div>
     </div>
 </template>
 <script>
@@ -15,17 +19,26 @@ export default {
     components: { Button },
     data() {
         return {
-            hash: ""
+            hash: "",
+            id: ''
         }
     },
     mounted() {
-        console.log(this.$api);
-        this.$api.get('http://www.baidu.com')
-            .then(res => console.log)
+       
     },
     methods: {
         uploadHash() {
             console.log(this.hash);
+            let exp1 = { "account":"123456", "mktree":[] }
+            exp1.mktree = this.hash.split(',')
+            this.$api.post('/cargo', exp1)
+                .then(res => console.log)
+                .catch(err => console.log)
+        },
+        get() {
+            this.$api.get('/cargo/'+this.id)
+            .then(res => console.log)
+            .catch(err => console.log)
         }
     }
 }
